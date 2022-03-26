@@ -2,7 +2,7 @@ package ru.lywi.mixin;
 
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import ru.lywi.screen.PlayersList;
 
-@Mixin(InventoryScreen.class)
-public abstract class InventoryScreenGui extends Screen {
+@Mixin(CreativeInventoryScreen.class)
+public class CreativeInventoryScreenGui extends Screen {
     private static final Identifier QUESTION_ICON_TEXTURE = new Identifier("lywi", "textures/gui/question.png");
 
-    public InventoryScreenGui(Text title)
+    public CreativeInventoryScreenGui(Text title)
     {
         super(title);
     }
