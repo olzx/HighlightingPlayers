@@ -6,7 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "ExampleMixin"
+    "InventoryScreenGui"
   ],
   "injectors": {
     "defaultRequire": 1
