@@ -2,42 +2,32 @@ package ru.lywi.screen;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.world.World;
+import ru.lywi.world.entity.EntityUtils;
 
 import java.util.ArrayList;
 
+
 public class PlayersList extends Screen {
-    public ArrayList<PlayerEntity> playersList = new ArrayList<>();
+    public static ArrayList<PlayerEntity> playersList = new ArrayList<>();
 
     public PlayersList(Text title) {
         super(title);
 
-        playersList.addAll(getPlayerEntityList());
+        playersList.clear();
+        playersList.addAll(EntityUtils.getEntityListInRange(PlayerEntity.class, 80));
     }
 
-    private ArrayList<PlayerEntity> getPlayerEntityList() {
-        PlayerEntity player = MinecraftClient.getInstance().player;
-        World world = MinecraftClient.getInstance().world;
-        ArrayList<PlayerEntity> list = new ArrayList<>();
-
-        if (player != null && world != null && world.isClient()) {
-            BlockPos playerPos = new BlockPos(player.getPos());
-            list.addAll(world.getEntitiesByClass(
-                    PlayerEntity.class,
-                    new Box(playerPos.getX() - 200,
-                            playerPos.getY() - 200,
-                            playerPos.getZ() - 200,
-                            playerPos.getX() + 200,
-                            playerPos.getY() + 200,
-                            playerPos.getZ() + 200),
-                    Entity::isAlive)
-            );
+    public void init() {
+        int margin = 20;
+        for (Entity entity : playersList) {
+            this.addDrawableChild(new ButtonWidget(20, margin, 60, 20, entity.getDisplayName(), action -> {
+                MinecraftClient.getInstance().player.lookAt(entity.getCommandSource().getEntityAnchor(), entity.getPos());
+            }));
+            margin += 25;
         }
-        return list;
     }
 }
