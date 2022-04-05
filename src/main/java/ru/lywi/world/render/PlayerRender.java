@@ -19,6 +19,7 @@ public class PlayerRender {
         Vec3d cameraPos = wrc.gameRenderer().getCamera().getPos();
 
         for (Entity entity: PlayersList.playersList) {
+            if (entity == player) continue;
             Box box = new Box(entity.getBlockPos()).offset(cameraPos.negate());
             WorldRender.renderBox(box);
             WorldRender.renderBox(box.offset(0, 1, 0));

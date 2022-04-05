@@ -14,12 +14,14 @@ import java.util.ArrayList;
 
 public class PlayersList extends Screen {
     public static ArrayList<PlayerEntity> playersList = new ArrayList<>();
+    private final PlayerEntity player;
 
     public PlayersList(Text title) {
         super(title);
 
         playersList.clear();
         playersList.addAll(EntityUtils.getEntityListInRange(PlayerEntity.class, 80));
+        this.player = MinecraftClient.getInstance().player;
     }
 
     public void init() {
@@ -27,6 +29,7 @@ public class PlayersList extends Screen {
 
         int margin = 20;
         for (Entity entity : playersList) {
+            if (entity == this.player) continue;
             this.addDrawableChild(new ButtonWidget(20, margin, 60, 20, entity.getDisplayName(), action -> {
                 MinecraftClient.getInstance().player.lookAt(entity.getCommandSource().getEntityAnchor(), entity.getPos());
             }));
