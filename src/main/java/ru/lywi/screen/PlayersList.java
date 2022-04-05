@@ -30,7 +30,9 @@ public class PlayersList extends Screen {
         int margin = 20;
         for (Entity entity : playersList) {
             if (entity == this.player) continue;
-            this.addDrawableChild(new ButtonWidget(20, margin, 60, 20, entity.getDisplayName(), action -> {
+            String displayName = entity.getDisplayName().getString();
+            int width = displayName.length() > 0 ? displayName.length()*5+30 : 50;
+            this.addDrawableChild(new ButtonWidget(20, margin, width, 20, new LiteralText(displayName), action -> {
                 MinecraftClient.getInstance().player.lookAt(entity.getCommandSource().getEntityAnchor(), entity.getPos());
             }));
             margin += 25;
