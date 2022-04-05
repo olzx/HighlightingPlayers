@@ -20,6 +20,7 @@ public class WorldRender {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
         bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_STRIP, VertexFormats.POSITION_COLOR);
+        RenderSystem.disableCull();
         RenderSystem.enableBlend();
         RenderSystem.disableDepthTest();
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -49,20 +50,6 @@ public class WorldRender {
         bufferBuilder.vertex(g, e, f).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(d, h, f).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(d, e, f).color(red, green, blue, alpha).next();
-        tessellator.draw();
-
-        bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_STRIP, VertexFormats.POSITION_COLOR);
-        bufferBuilder.vertex(d, e, f).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(g, e, f).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(d, e, i).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(g, e, i).color(red, green, blue, alpha).next();
-        tessellator.draw();
-
-        bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_STRIP, VertexFormats.POSITION_COLOR);
-        bufferBuilder.vertex(d, h, f).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(d, h, i).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(g, h, f).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(g, h, i).color(red, green, blue, alpha).next();
         tessellator.draw();
     }
 }
