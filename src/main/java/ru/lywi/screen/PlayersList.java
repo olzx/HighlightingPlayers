@@ -31,8 +31,11 @@ public class PlayersList extends Screen {
         for (Entity entity : playersList) {
             if (entity == this.player) continue;
             String displayName = entity.getDisplayName().getString();
-            int width = displayName.length() > 0 ? displayName.length()*5+30 : 50;
-            this.addDrawableChild(new ButtonWidget(20, margin, width, 20, new LiteralText(displayName), action -> {
+            int distanceToEntity = (int) this.player.distanceTo(entity);
+            String distanceInString = "[" + distanceToEntity + "]";
+            String finalString = displayName + " " + distanceInString;
+            int width = displayName.length() > 0 ? finalString.length()*5+20 : 50;
+            this.addDrawableChild(new ButtonWidget(20, margin, width, 20, new LiteralText(finalString), action -> {
                 MinecraftClient.getInstance().player.lookAt(entity.getCommandSource().getEntityAnchor(), entity.getPos());
             }));
             margin += 25;
