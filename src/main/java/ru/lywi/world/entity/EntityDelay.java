@@ -28,4 +28,10 @@ public class EntityDelay <T extends Entity>{
         int sec = this.calendar.get(Calendar.SECOND);
         this.calendar.set(Calendar.SECOND, sec + seconds);
     }
+
+    public boolean timePassed() {
+        Date currentTime = new GregorianCalendar().getTime();
+        Date timeDelay = this.calendar.getTime();
+        return currentTime.getTime() > timeDelay.getTime();
+    }
 }
