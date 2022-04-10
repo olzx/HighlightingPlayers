@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import ru.lywi.world.entity.EntityDelay;
+import ru.lywi.world.entity.EntityDistance;
 import ru.lywi.world.entity.EntityUtils;
 
 import java.util.ArrayList;
@@ -49,5 +50,15 @@ public class PlayersList extends Screen {
 
     private int getDistanceToEntity(Entity entity) {
         return (int) this.player.distanceTo(entity);
+    }
+
+    private ArrayList<EntityDistance> getEntityDistanceArray(ArrayList<PlayerEntity> playerEntity) {
+        ArrayList<EntityDistance> entityDistancesArray = new ArrayList<>();
+        for (PlayerEntity player : playerEntity) {
+            int distanceToEntity = getDistanceToEntity(player);
+            EntityDistance entityDistance = new EntityDistance(player, distanceToEntity);
+            entityDistancesArray.add(entityDistance);
+        }
+        return entityDistancesArray;
     }
 }
