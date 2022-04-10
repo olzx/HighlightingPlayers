@@ -3,6 +3,7 @@ package ru.lywi.screen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -44,5 +45,9 @@ public class PlayersList extends Screen {
             }));
             margin += 25;
         }
+    }
+
+    private int getDistanceToEntity(Entity entity) {
+        return (int) this.player.distanceTo(entity);
     }
 }
