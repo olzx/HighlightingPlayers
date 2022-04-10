@@ -38,7 +38,7 @@ public class PlayersList extends Screen {
             PlayerEntity entity = (PlayerEntity) entityDistance.getEntity();
             if (entity == this.player) continue;
             String displayName = entity.getDisplayName().getString();
-            int distanceToEntity = (int) this.player.distanceTo(entity);
+            int distanceToEntity = entityDistance.getDistance();
             String distanceInString = "[" + distanceToEntity + "]";
             String finalString = displayName + " " + distanceInString;
             int width = displayName.length() > 0 ? finalString.length()*5+20 : 50;
