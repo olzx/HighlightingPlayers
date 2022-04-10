@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class PlayersList extends Screen {
     public static ArrayList<PlayerEntity> playersList = new ArrayList<>();
     public static ArrayList<EntityDelay<PlayerEntity>> playerListDelay = new ArrayList<>();
+    private final ArrayList<EntityDistance> entityDistances;
     private final PlayerEntity player;
     private int secondsShowGlow = 5;
 
@@ -25,6 +26,7 @@ public class PlayersList extends Screen {
 
         playersList.clear();
         playersList.addAll(EntityUtils.getEntityListInRange(PlayerEntity.class, 80));
+        this.entityDistances = getEntityDistanceArray(playersList);
         this.player = MinecraftClient.getInstance().player;
     }
 
