@@ -52,7 +52,11 @@ public class PlayersList extends Screen {
     }
 
     private int getDistanceToEntity(Entity entity) {
-        return (int) this.player.distanceTo(entity);
+        PlayerEntity player = MinecraftClient.getInstance().player;
+        if (player != null)
+            return (int) player.distanceTo(entity);
+        else
+            return -1;
     }
 
     private ArrayList<EntityDistance> getEntityDistanceArray(ArrayList<PlayerEntity> playerEntity) {
