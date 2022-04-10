@@ -34,7 +34,8 @@ public class PlayersList extends Screen {
         this.addDrawableChild(new ButtonWidget(20, this.height-40, 50, 20, new LiteralText("Закрыть"), action -> this.client.setScreen((Screen)null)));
 
         int margin = 20;
-        for (PlayerEntity entity : playersList) {
+        for (EntityDistance entityDistance : this.entityDistances) {
+            PlayerEntity entity = (PlayerEntity) entityDistance.getEntity();
             if (entity == this.player) continue;
             String displayName = entity.getDisplayName().getString();
             int distanceToEntity = (int) this.player.distanceTo(entity);
