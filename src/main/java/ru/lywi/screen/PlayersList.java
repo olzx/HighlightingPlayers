@@ -27,6 +27,7 @@ public class PlayersList extends Screen {
         playersList.clear();
         playersList.addAll(EntityUtils.getEntityListInRange(PlayerEntity.class, 80));
         this.entityDistances = getEntityDistanceArray(playersList);
+        this.sortEntityDistance(entityDistances);
         this.player = MinecraftClient.getInstance().player;
     }
 
@@ -67,5 +68,21 @@ public class PlayersList extends Screen {
             entityDistancesArray.add(entityDistance);
         }
         return entityDistancesArray;
+    }
+
+    private void sortEntityDistance(ArrayList<EntityDistance> entityDistancesArray) {
+        for(int i = entityDistancesArray.size()-1 ; i > 0 ; i--){
+            for(int j = 0 ; j < i ; j++){
+                EntityDistance entityDistance = entityDistancesArray.get(j);
+                EntityDistance entityDistanceNext = entityDistancesArray.get(j+1);
+                int distance = entityDistance.getDistance();
+                int distanceNext = entityDistanceNext.getDistance();
+
+                if( distance > distanceNext ){
+                    entityDistancesArray.set(j, entityDistanceNext);
+                    entityDistancesArray.set(j+1, entityDistance);
+                }
+            }
+        }
     }
 }
